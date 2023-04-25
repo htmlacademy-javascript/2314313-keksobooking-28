@@ -7,6 +7,8 @@ const MAX_LAT = 35.70000;
 const MIN_LNG = 139.70000;
 const MAX_LNG = 139.80000;
 const DEFAULT_NUM = 10;
+let lat;
+let lng;
 
 const TITLES = [
   'Заголовок 1',
@@ -62,8 +64,10 @@ const createAuthorObject = () => {
 
 const createOfferObject = () => {
   const offer = new Object();
+  lat = getRandomGeoLoc(MIN_LAT, MAX_LAT);
+  lng = getRandomGeoLoc(MIN_LNG, MAX_LNG);
   offer.title = TITLES[getRandomInteger(0, TITLES.length - 1)];
-  offer.address = `${getRandomGeoLoc(MIN_LAT, MAX_LAT)}, ${getRandomGeoLoc(MIN_LNG, MAX_LNG)}`;
+  offer.address = `${lat}, ${lng}`;
   offer.price = getRandomInteger(1, 10000000000);
   offer.type = TYPES[getRandomInteger(0, TYPES.length - 1)];
   offer.rooms = getRandomInteger(1, 10);
@@ -78,8 +82,8 @@ const createOfferObject = () => {
 
 const createLocation = () => {
   const location = new Object();
-  location.lat = getRandomGeoLoc(MIN_LAT, MAX_LAT);
-  location.lng = getRandomGeoLoc(MIN_LNG, MAX_LNG);
+  location.lat = lat;
+  location.lng = lng;
   return location;
 };
 

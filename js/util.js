@@ -26,7 +26,7 @@ const getUniqueRandomInteger = (min, max) => {
   };
 };
 
-const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length - 1)];
+const getRandomArrayElement = (data) => data[getRandomInteger(0, data.length - 1)];
 
 const createArray = (array) => Array.from({ length: getRandomInteger(0, array.length - 1)}, () => getRandomArrayElement(array));
 
