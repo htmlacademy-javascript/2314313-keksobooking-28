@@ -23,7 +23,7 @@
 
       <!-- Фильтрация объявлений -->
       <div class="map__filters-container">
-        <form action="#" class="map__filters" autocomplete="off">
+        <form action="#" class="map__filters" method="post" action="https://28.javascript.pages.academy/keksobooking" enctype="multipart/form-data" autocomplete="off">
           <select name="housing-type" id="housing-type" class="map__filter">
             <option value="any" selected>Любой тип жилья</option>
             <option value="bungalow">Бунгало</option>
@@ -87,11 +87,17 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="title">Заголовок объявления</label>
-          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио">
+          <input id="title" name="title" type="text" placeholder="Милая, уютная квартирка в центре Токио" required
+          data-pristine-minlength="30"
+          data-pristine-maxlength="100"
+          data-pristine-required-message="Это поле обязательное"
+          data-pristine-minlength-message="От 30 символов"
+          data-pristine-maxlength-message="До 100 символов">
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text">
+          <input id="address" name="address" type="text" required
+          data-pristine-required-message="Это поле обязательное">
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -105,7 +111,10 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
-          <input id="price" name="price" type="number" placeholder="5000">
+          <input id="price" name="price" type="number" placeholder="5000" required
+          data-pristine-pattern="/[0-9]/"
+          data-pristine-required-message="Это поле обязательное"
+          data-pristine-pattern-message="Значение может быть только числовым">
           <div class="ad-form__slider"></div>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
@@ -162,7 +171,8 @@
           <label class="ad-form__label">Фотография жилья</label>
           <div class="ad-form__photo-container">
             <div class="ad-form__upload">
-              <input type="file" id="images" name="images" class="ad-form__input visually-hidden">
+              <input type="file" id="images" name="images" class="ad-form__input visually-hidden" required
+              data-pristine-required-message="Это поле обязательное">
               <label for="images" class="ad-form__drop-zone">Загрузить<br>фото...</label>
             </div>
             <div class="ad-form__photo"></div>
@@ -229,5 +239,6 @@
     </div>
   </template>
 <script src="./js/main.js" type="module"></script>
+<script src="./vendor/pristine/pristine.min.js"></script>
 </body>
 </html>
