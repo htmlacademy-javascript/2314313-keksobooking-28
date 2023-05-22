@@ -1,3 +1,4 @@
-import { createAllData } from './data.js';
-createAllData();
-
+//import { createAllData } from './data.js';
+import { addAd } from './ads.js';
+//createAllData();
+addAd();

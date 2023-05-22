@@ -11,8 +11,6 @@ let lat;
 let lng;
 
 const TITLES = [
-  'Заголовок 1',
-  'Заголовок 2',
   'Заголовок 3',
 ];
 const TYPES = [
@@ -49,6 +47,14 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
+
+const TYPES_ON_RUS = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
+};
 
 const getUniqueAddressImg = getUniqueRandomInteger(MIN_INDEX, MAX_INDEX);
 
@@ -97,4 +103,4 @@ const createData = () => {
 
 const createAllData = () => Array.from({ length: DEFAULT_NUM }, () => createData());
 
-export { createAllData };
+export { createAllData, TYPES_ON_RUS , createData};
