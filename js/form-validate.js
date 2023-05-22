@@ -1,18 +1,13 @@
 const form = document.querySelector('.ad-form');
-// const fieldsetsInForm = form.querySelector('fieldset');
-// const formMapFilters = document.querySelector('.map__filters');
-// const fieldsetInMap = formMapFilters.querySelector('fieldset');
-// const mapFilters = formMapFilters.querySelectorAll('.map__filter');
 const price = form.querySelector('#price');
 const fieldRooms = form.querySelector('#room_number');
 const fieldGuests = form.querySelector('#capacity');
-const priceErrorMessage = 'Не больше 10000';
+const priceErrorMessage = 'Не больше 100000';
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const typeInput = document.querySelector('#type');
 const imagesInput = document.querySelector('#images');
-price.placeholder = '1000';
-const pricePlaceholder = document.querySelector('#price').placeholder;
+//price.placeholder = '1000';
 const errImg = 'Такой формат не подходит';
 const roomsOptions = {
   '1' : ['1'],
@@ -29,21 +24,7 @@ const typesOfHousing = {
   'palace' : '10000'
 };
 
-// const beInactivePage = () => {
-//   form.classList.add('ad-form--disabled');
-//   fieldsetsInForm.classList.add('disabled');
-//   formMapFilters.classList.add('ad-form--disabled');
-//   fieldsetInMap.classList.add('disabled');
-//   mapFilters.classList.add('disabled');
-// };
-
-// const beActivePage = () => {
-//   form.classList.remove('ad-form--disabled');
-//   fieldsetsInForm.classList.remove('disabled');
-//   formMapFilters.classList.remove('ad-form--disabled');
-//   fieldsetInMap.classList.remove('disabled');
-//   mapFilters.classList.remove('disabled');
-// };
+let selectedHousing = 'flat';
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -51,8 +32,6 @@ const pristine = new Pristine(form, {
   successClass: '.success__message::before',
   errorTextParent: 'ad-form__element',
   errorTextTag: 'span',
-  //errorTextClass: 'error__message',
-
 }, false);
 
 const validateRooms = () => roomsOptions[fieldRooms.value].includes(fieldGuests.value);
@@ -63,16 +42,19 @@ const getRoomsErrMessageGuests = () => `${!(fieldGuests.value === 'не для �
 pristine.addValidator(fieldGuests, validateRooms, getRoomsErrMessageGuests);
 pristine.addValidator(fieldRooms, validateRooms, getRoomsErrMessageRooms);
 
-const validatePriceForHouses = (value) => {
-  const selectedHousing = value;
-  return (parseInt(price.value, 10) >= parseInt(typesOfHousing[selectedHousing], 10));
-};
-const getErrMessagePriceForDifferentHouses = () => `Не ниже ${pricePlaceholder}`;
+const validatePriceForHouses = (value) => (parseInt(value, 10) >= parseInt(typesOfHousing[selectedHousing], 10));
+
+const getErrMessagePriceForDifferentHouses = () => `Не ниже ${price.placeholder}`;
 
 pristine.addValidator(price, validatePriceForHouses, getErrMessagePriceForDifferentHouses);
 
 const onChangeHousing = (evt) => {
-  price.placeholder = typesOfHousing[evt.target.value];
+  selectedHousing = evt.target.value;
+  price.placeholder = typesOfHousing[selectedHousing];
+  //price.value = typesOfHousing[selectedHousing];
+  //console.log('placeholder',price.placeholder)
+  // console.log(selectedHousing)
+  //price.placeholder = typesOfHousing[evt.target.value];
   pristine.validate(price);
 };
 
@@ -89,7 +71,7 @@ timeIn.addEventListener('change', onChangeTimeIn);
 timeOut.addEventListener('change', onChangeTimeOut);
 
 pristine.addValidator(price, (value) => {
-  if(value <= 10000){
+  if(value <= 100000){
     return true;
   } return false;
 }, priceErrorMessage);
@@ -105,3 +87,5 @@ form.addEventListener('submit', (evt) => {
     evt.preventDefault();
   }
 });
+
+export{ form, price };

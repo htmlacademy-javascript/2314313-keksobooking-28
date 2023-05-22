@@ -147,11 +147,16 @@ const renderPosterProp = (ad, value) => {
       renderDefault(condition, targetProp, targetElement, targetValue);
       break;
   }
+  //console.log(targetElement);
   fragment.append(targetElement);
+  // console.log(fragment)
+  // return fragment;
+  // console.log('t',targetElement)
+  // return fragment;
 };
 
+const allData = createAllData();
 const getPosterProps = () => {
-  const allData = createAllData();
   const data = allData[0];
   const posterProps = createPosterProps(data);
   const ad = adTemplate.cloneNode(true);
@@ -163,5 +168,4 @@ const addAd = () => {
   adContainer.append(fragment);
 };
 
-
-export { addAd };
+export { allData, addAd , renderPosterProp, createPosterProps, fragment };
