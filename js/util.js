@@ -10,7 +10,6 @@ const getRandomInteger = (min, max) => {
 
 const getRandomGeoLoc = (min, max) => (Math.random() * (max - min) + min).toFixed(5);
 
-
 const getUniqueRandomInteger = (min, max) => {
   const previousValues = [];
   return function () {
