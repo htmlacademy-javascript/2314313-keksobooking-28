@@ -34,4 +34,10 @@ const disableSlider = () => {
   price.removeEventListener('input', onChangePrice);
 };
 
-export { disableSlider, enableSlider };
+const resetSlider = () => {
+  sliderElement.noUiSlider.updateOptions({
+    start : 5000,
+  });
+};
+
+export { disableSlider, enableSlider, resetSlider };

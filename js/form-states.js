@@ -1,4 +1,4 @@
-import { form } from './form-validate.js';
+import { changePlaceholder, form } from './form-validate.js';
 import { disableSlider, enableSlider } from './slider.js';
 const attributesInForm = form.querySelectorAll('fieldset');
 const formMapFilters = document.querySelector('.map__filters');
@@ -25,6 +25,7 @@ const beActive = (formName, formInputs) => {
     input.removeAttribute('disabled', 'disabled');
   }
   );
+  changePlaceholder();
 };
 
 const unBlockForm = () => beActive(form, attributesInForm);
@@ -33,4 +34,4 @@ const unBlockMapFilters = () => beActive(formMapFilters, attributesInMap);
 blockForm();
 blockMapFilters();
 
-export { unBlockForm, unBlockMapFilters };
+export { unBlockForm, unBlockMapFilters, formMapFilters };

@@ -1,24 +1,24 @@
 
 import { TYPES_ON_RUS } from './data.js';
-import { createAllData } from './data.js';
-const adContainer = document.querySelector('#map-canvas');
+//import { createAllData } from './data.js';
+//const adContainer = document.querySelector('#map-canvas');
 
-const adTemplate = document.querySelector('#card').content.querySelector('.popup');
+//const adTemplate = document.querySelector('#card').content.querySelector('.popup');
 const fragment = document.createDocumentFragment();
 
-const isEmptyOrNull = (arrOrString) => {
-  if(arrOrString.length === 0){
-    return false;
-  }
-  return true;
-};
+// const isEmptyOrNull = (arrOrString) => {
+//   if(arrOrString.length === 0){
+//     return false;
+//   }
+//   return true;
+// };
 
 const createPosterProps = ({author, offer}) => {
   const props = [
     {
       avatar: {
         querySelector : '.popup__avatar',
-        condition : isEmptyOrNull(author.avatar),
+        condition : author.avatar,
         targetProp : 'src',
         targetValue : author.avatar,
       }
@@ -26,7 +26,7 @@ const createPosterProps = ({author, offer}) => {
     {
       title: {
         querySelector : '.popup__title',
-        condition : isEmptyOrNull(offer.title),
+        condition : offer.title,
         targetProp : 'textContent',
         targetValue : offer.title,
       }
@@ -34,7 +34,7 @@ const createPosterProps = ({author, offer}) => {
     {
       address: {
         querySelector : '.popup__text--address',
-        condition : isEmptyOrNull(offer.address),
+        condition : offer.address,
         targetProp : 'textContent',
         targetValue : offer.address,
       }
@@ -42,7 +42,7 @@ const createPosterProps = ({author, offer}) => {
     {
       price: {
         querySelector : '.popup__text--price',
-        condition : isEmptyOrNull(offer.price),
+        condition : offer.price,
         targetProp : 'textContent',
         targetValue : `${offer.price} ₽/ночь`,
       }
@@ -50,7 +50,7 @@ const createPosterProps = ({author, offer}) => {
     {
       type: {
         querySelector : '.popup__type',
-        condition : isEmptyOrNull(offer.type),
+        condition : offer.type,
         targetProp : 'textContent',
         targetValue : TYPES_ON_RUS[offer.type],
       }
@@ -58,7 +58,7 @@ const createPosterProps = ({author, offer}) => {
     {
       capacity: {
         querySelector : '.popup__text--capacity',
-        condition : isEmptyOrNull(offer.rooms) || isEmptyOrNull(offer.guests),
+        condition : offer.rooms || offer.guests,
         targetProp : 'textContent',
         targetValue : `${offer.rooms} комнаты для ${offer.guests} гостей`,
       }
@@ -66,7 +66,7 @@ const createPosterProps = ({author, offer}) => {
     {
       time: {
         querySelector : '.popup__text--time',
-        condition : isEmptyOrNull(offer.checkin) || isEmptyOrNull(offer.checkout),
+        condition : offer.checkin || offer.checkout,
         targetProp : 'textContent',
         targetValue : `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`,
       }
@@ -74,7 +74,7 @@ const createPosterProps = ({author, offer}) => {
     {
       features: {
         querySelector : '.popup__features',
-        condition : isEmptyOrNull(offer.features),
+        condition : offer.features,
         targetProp : 'textContent',
         targetValue : offer.features,
       }
@@ -82,7 +82,7 @@ const createPosterProps = ({author, offer}) => {
     {
       description: {
         querySelector : '.popup__description',
-        condition : isEmptyOrNull(offer.description),
+        condition : /*isEmptyOrNull(*/offer.description,
         targetProp : 'textContent',
         targetValue : offer.description,
       }
@@ -90,7 +90,7 @@ const createPosterProps = ({author, offer}) => {
     {
       photos: {
         querySelector : '.popup__photos',
-        condition : isEmptyOrNull(offer.photos),
+        condition : offer.photos,
         targetProp : 'src',
         targetValue : offer.photos,
       }
@@ -101,22 +101,30 @@ const createPosterProps = ({author, offer}) => {
 
 const renderFeatures = (arrFeatures, list) => {
   list.innerHTML = '';
-  for(let i = 0; i < arrFeatures.length; i++){
-    const elList = document.createElement('li');
-    elList.classList.add('popup__feature', `popup__feature--${arrFeatures[i]}`);
-    list.appendChild(elList);
-  }
+  if(arrFeatures){
+    for(let i = 0; i < arrFeatures.length; i++){
+      const elList = document.createElement('li');
+      elList.classList.add('popup__feature', `popup__feature--${arrFeatures[i]}`);
+      list.appendChild(elList);
+    }
+ }
+  // list.remove();
 };
+
 
 const renderPhotos = (arrPhotos, list, photo) => {
   list.innerHTML = '';
+  if (arrPhotos) {
 
-  for(let i = 0; i < arrPhotos.length; i++){
-    const img = photo.cloneNode(true);
-    img.removeAttribute('src');
-    img.src = arrPhotos[i];
-    list.appendChild(img);
-  }
+
+    for(let i = 0; i < arrPhotos.length; i++){
+      const img = photo.cloneNode(true);
+      img.removeAttribute('src');
+      img.src = arrPhotos[i];
+      list.appendChild(img);
+    }
+   }
+  // list.remove();
 };
 
 const renderDefault = (condition, targetProp, targetElement, targetValue) => {
@@ -155,17 +163,18 @@ const renderPosterProp = (ad, value) => {
   // return fragment;
 };
 
-const allData = createAllData();
-const getPosterProps = () => {
-  const data = allData[0];
-  const posterProps = createPosterProps(data);
-  const ad = adTemplate.cloneNode(true);
-  posterProps.forEach((item) => Object.values(item).map((value) => renderPosterProp(ad, value)));
-};
+//const allData = createAllData();
+// const getPosterProps = () => {
+//   const data = allData[0];
+//   const posterProps = createPosterProps(data);
+//   const ad = adTemplate.cloneNode(true);
+//   posterProps.forEach((item) => Object.values(item).map((value) => renderPosterProp(ad, value)));
+// };
 
-const addAd = () => {
-  getPosterProps();
-  adContainer.append(fragment);
-};
+// const addAd = () => {
+//   getPosterProps();
+//   adContainer.append(fragment);
+// };
 
-export { allData, addAd , renderPosterProp, createPosterProps, fragment };
+export { /*allData,*/ renderPosterProp, createPosterProps, fragment };
+
