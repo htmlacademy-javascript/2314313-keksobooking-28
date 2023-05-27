@@ -97,13 +97,11 @@ const setUserFormSubmit = (onSuccess) => {
           body : formData,
         })
         .then(() => {
-          console.log('suc');
           showSuccess();
           onSuccess();
         }
         )
         .catch(() => {
-          console.error('err');
           showError();
         });
     }

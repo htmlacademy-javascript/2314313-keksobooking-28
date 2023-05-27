@@ -107,8 +107,7 @@ const renderFeatures = (arrFeatures, list) => {
       elList.classList.add('popup__feature', `popup__feature--${arrFeatures[i]}`);
       list.appendChild(elList);
     }
- }
-  // list.remove();
+  }
 };
 
 
@@ -123,8 +122,7 @@ const renderPhotos = (arrPhotos, list, photo) => {
       img.src = arrPhotos[i];
       list.appendChild(img);
     }
-   }
-  // list.remove();
+  }
 };
 
 const renderDefault = (condition, targetProp, targetElement, targetValue) => {
