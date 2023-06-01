@@ -8,7 +8,6 @@ const closeSuccessOrErr = () => {
   const errServerModalWindow = document.querySelector('.error__server');
   document.body.classList.remove('modal-open');
   if(successModalWindow){
-    //console.log('success');
     successModalWindow.remove();
   } else if(errModalWindow){
     const errButton = errModalWindow.querySelector('.error__button');
@@ -23,7 +22,6 @@ const onDocumentKeyDown = (evt) => {
   if(isEscapeKey(evt)){
     evt.preventDefault();
     closeSuccessOrErr();
-    //closeSuccess();
     document.removeEventListener('keydown', onDocumentKeyDown);
   }
 };
@@ -31,7 +29,6 @@ const onDocumentKeyDown = (evt) => {
 const onModalClick = (evt) => {
   if(evt.target === evt.currentTarget){
     evt.preventDefault();
-    //closeSuccess();
     closeSuccessOrErr();
     document.removeEventListener('click', onModalClick);
   }
@@ -58,12 +55,9 @@ const showError = () => {
 const showErrGet = () => {
   const div = document.createElement('div');
   const paragraph = document.createElement('p');
-  //const button = document.createElement('button');
   div.appendChild(paragraph);
-  //div.appendChild(button);
   div.classList.add('error__server');
   paragraph.classList.add('error__message');
-  //button.classList.add('error__button');
   paragraph.textContent = 'Ошибка сервера. Перезагрузите страницу.';
   document.body.insertAdjacentElement('beforeend', div);
   document.body.classList.add('modal-open');

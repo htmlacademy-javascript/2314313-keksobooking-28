@@ -40,4 +40,6 @@ const resetSlider = () => {
   });
 };
 
+price.value = null;
+
 export { disableSlider, enableSlider, resetSlider };

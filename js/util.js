@@ -1,12 +1,10 @@
 
-
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
-//const getNumAfterPoint = (num) => (num.toString().includes('.') ? (num.toString().split('.').pop().length) : (0));
 
 const getRandomGeoLoc = (min, max) => (Math.random() * (max - min) + min).toFixed(5);
 
@@ -34,16 +32,14 @@ const checkMatch = (data) => {
   return [... uniqSet];
 };
 
-// const showError = () => {
-//   const errElement = document.querySelector('#error').content.querySelector('.error');
-//   document.body.append(errElement);
-// };
-
-// const showSuccess = () => {
-//   const successElement = document.querySelector('#success').content.querySelector('.success');
-//   document.body.insertAdjacentElement('beforeend', successElement);
-// };
+const debounce = (callBack, timeToDelay) => {
+  let timeOutId;
+  return (... rest) => {
+    clearTimeout(timeOutId);
+    timeOutId = setTimeout(() => callBack.apply(this, rest), timeToDelay);
+  };
+};
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export { getRandomInteger, getRandomGeoLoc, checkMatch, createArray, getUniqueRandomInteger, isEscapeKey/*, showError, showSuccess*/ };
+export { getRandomInteger, getRandomGeoLoc, checkMatch, createArray, getUniqueRandomInteger, isEscapeKey, debounce };

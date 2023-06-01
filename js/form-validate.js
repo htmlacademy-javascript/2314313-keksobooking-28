@@ -8,7 +8,7 @@ const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const typeInput = document.querySelector('#type');
 const imagesInput = document.querySelector('#images');
-//price.placeholder = '1000';
+const submitButton = document.querySelector('.ad-form__submit');
 const errImg = 'Такой формат не подходит';
 const roomsOptions = {
   '1' : ['1'],
@@ -25,6 +25,11 @@ const typesOfHousing = {
   'palace' : '10000'
 };
 
+const submitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
 let selectedHousing = 'flat';
 
 const changePlaceholder = () => {
@@ -33,11 +38,20 @@ const changePlaceholder = () => {
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
-  errorClass: '.error__message::before',
-  successClass: '.success__message::before',
+  errorClass: 'ad-form__element--invalid',
   errorTextParent: 'ad-form__element',
   errorTextTag: 'span',
 }, false);
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = submitButtonText.SENDING;
+};
+
+const unBlockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = submitButtonText.IDLE;
+};
 
 const validateRooms = () => roomsOptions[fieldRooms.value].includes(fieldGuests.value);
 
@@ -56,10 +70,6 @@ pristine.addValidator(price, validatePriceForHouses, getErrMessagePriceForDiffer
 const onChangeHousing = (evt) => {
   selectedHousing = evt.target.value;
   price.placeholder = typesOfHousing[selectedHousing];
-  //price.value = typesOfHousing[selectedHousing];
-  //console.log('placeholder',price.placeholder)
-  // console.log(selectedHousing)
-  //price.placeholder = typesOfHousing[evt.target.value];
   pristine.validate(price);
 };
 
@@ -89,6 +99,7 @@ const setUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if(isValid){
+      blockSubmitButton();
       const formData = new FormData(evt.target);
       fetch('https://28.javascript.pages.academy/keksobooking',
         {
@@ -96,14 +107,19 @@ const setUserFormSubmit = (onSuccess) => {
           type : 'multipart/form-data',
           body : formData,
         })
-        .then(() => {
-          showSuccess();
-          onSuccess();
+        .then((response) => {
+          if(response.ok){
+            showSuccess();
+            onSuccess();
+          } else {
+            showError();
+          }
         }
         )
         .catch(() => {
           showError();
-        });
+        })
+        .finally(() => unBlockSubmitButton());
     }
   });
 };
