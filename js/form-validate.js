@@ -1,3 +1,4 @@
+import { showSuccess, showError } from './message-show.js';
 const form = document.querySelector('.ad-form');
 const price = form.querySelector('#price');
 const fieldRooms = form.querySelector('#room_number');
@@ -25,6 +26,10 @@ const typesOfHousing = {
 };
 
 let selectedHousing = 'flat';
+
+const changePlaceholder = () => {
+  price.placeholder = typesOfHousing[typeInput.value];
+};
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -79,13 +84,28 @@ pristine.addValidator(price, (value) => {
 const validateImages = (url) => /.jpg$/i.test(url) || /.png$/i.test(url) || /.jpeg$/i.test(url);
 
 pristine.addValidator(imagesInput, validateImages, errImg);
-
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
-  if(isValid){
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+    const isValid = pristine.validate();
+    if(isValid){
+      const formData = new FormData(evt.target);
+      fetch('https://28.javascript.pages.academy/keksobooking',
+        {
+          method : 'POST',
+          type : 'multipart/form-data',
+          body : formData,
+        })
+        .then(() => {
+          showSuccess();
+          onSuccess();
+        }
+        )
+        .catch(() => {
+          showError();
+        });
+    }
+  });
+};
 
-export{ form, price };
+export{ form, price, setUserFormSubmit, changePlaceholder };

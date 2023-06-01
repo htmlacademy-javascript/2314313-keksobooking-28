@@ -34,4 +34,16 @@ const checkMatch = (data) => {
   return [... uniqSet];
 };
 
-export { getRandomInteger, getRandomGeoLoc, checkMatch, createArray, getUniqueRandomInteger };
+// const showError = () => {
+//   const errElement = document.querySelector('#error').content.querySelector('.error');
+//   document.body.append(errElement);
+// };
+
+// const showSuccess = () => {
+//   const successElement = document.querySelector('#success').content.querySelector('.success');
+//   document.body.insertAdjacentElement('beforeend', successElement);
+// };
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export { getRandomInteger, getRandomGeoLoc, checkMatch, createArray, getUniqueRandomInteger, isEscapeKey/*, showError, showSuccess*/ };

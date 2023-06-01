@@ -1,5 +1,5 @@
-import { allData , renderPosterProp, createPosterProps, fragment } from './ads.js';
-import { unBlockForm, unBlockMapFilters } from './form-states.js';
+import { /*allData ,*/renderPosterProp, createPosterProps, fragment } from './ads.js';
+import { unBlockForm/*, unBlockMapFilters*/ } from './form-states.js';
 const addressInput = document.querySelector('#address');
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -13,12 +13,13 @@ const ZOOM = 10;
 const map = L.map('map-canvas')
   .on('load', () => {
     unBlockForm();
-    unBlockMapFilters();
+    //unBlockMapFilters();
   })
   .setView(cityCenter, ZOOM);
 
 const iconConfig = {
-  url : './img/main-pin.svg',
+  mainUrl : './img/main-pin.svg',
+  url : './img/pin.svg',
   sizeMainIcon: [52, 52],
   sizeDefault : [40, 40],
   anchorMain: [26, 52],
@@ -31,7 +32,7 @@ L.tileLayer(TILE_LAYER, {
 ).addTo(map);
 
 const mainPinIcon = L.icon({
-  iconUrl : iconConfig.url,
+  iconUrl : iconConfig.mainUrl,
   iconSize : iconConfig.sizeMainIcon,
   iconAnchor : iconConfig.anchorMain,
 });
@@ -73,21 +74,32 @@ const createCustomPopup = (point) => {
 };
 
 
-allData.forEach((point) => {
-  const location = point.location;
-  const lat = location.lat;
-  const lng = location.lng;
-  const defaultMarker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon : defaultIcon,
-    },
-  );
-  defaultMarker
-    .addTo(map)
-    .bindPopup(createCustomPopup(point));
-});
+const createMarkers = (allData) => {
+  allData.forEach((point) => {
+    const location = point.location;
+    const lat = location.lat;
+    const lng = location.lng;
+    const defaultMarker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon : defaultIcon,
+      },
+    );
+    defaultMarker
+      .addTo(map)
+      .bindPopup(createCustomPopup(point));
+  });
+};
+
+const resetMap = () => {
+  marker.setLatLng(cityCenter);
+  map.setView(cityCenter, ZOOM);
+  setAddressInputValue(cityCenter);
+  map.closePopup();
+};
+
+export { createMarkers, resetMap };
 
