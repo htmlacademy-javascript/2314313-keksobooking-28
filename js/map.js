@@ -1,5 +1,5 @@
-import { /*allData ,*/renderPosterProp, createPosterProps, fragment } from './ads.js';
-import { unBlockForm/*, unBlockMapFilters*/ } from './form-states.js';
+import { renderPosterProp, createPosterProps, fragment } from './ads.js';
+import { unBlockForm } from './form-states.js';
 const addressInput = document.querySelector('#address');
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -13,7 +13,6 @@ const ZOOM = 10;
 const map = L.map('map-canvas')
   .on('load', () => {
     unBlockForm();
-    //unBlockMapFilters();
   })
   .setView(cityCenter, ZOOM);
 
@@ -73,6 +72,8 @@ const createCustomPopup = (point) => {
   return adElement;
 };
 
+const markerGroup = L.layerGroup().addTo(map);
+
 
 const createMarkers = (allData) => {
   allData.forEach((point) => {
@@ -89,7 +90,7 @@ const createMarkers = (allData) => {
       },
     );
     defaultMarker
-      .addTo(map)
+      .addTo(markerGroup)
       .bindPopup(createCustomPopup(point));
   });
 };
@@ -101,5 +102,4 @@ const resetMap = () => {
   map.closePopup();
 };
 
-export { createMarkers, resetMap };
-
+export { createMarkers, resetMap, markerGroup };
