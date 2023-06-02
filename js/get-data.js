@@ -1,9 +1,10 @@
 import { debounce } from './util.js';
 import { onClickFilter } from './filter.js';
-import { unBlockMapFilters } from './form-states.js';
+import { unlockMapFilters } from './form-states.js';
 const RERENDER_DELAY = 500;
+const ADDRESS_GET_DATA = 'https://28.javascript.pages.academy/keksobooking/data';
 
-const getData = (onSucess, onError) => () => fetch('https://28.javascript.pages.academy/keksobooking/data',)
+const getData = (onSucess, onError) => () => fetch(ADDRESS_GET_DATA,)
   .then((response) => {
     if(response.ok){
       return response.json();
@@ -13,7 +14,7 @@ const getData = (onSucess, onError) => () => fetch('https://28.javascript.pages.
   .then((data) => {
     onSucess(data);
     onClickFilter(debounce(() => onSucess(data), RERENDER_DELAY));
-    unBlockMapFilters();
+    unlockMapFilters();
   })
   .catch((err) => onError(err));
 

@@ -1,9 +1,11 @@
 import { showSuccess, showError } from './message-show.js';
+const ADDRESS_POST_DATA = 'https://28.javascript.pages.academy/keksobooking';
+const MAX_PRICE = 100000;
 const form = document.querySelector('.ad-form');
 const price = form.querySelector('#price');
 const fieldRooms = form.querySelector('#room_number');
 const fieldGuests = form.querySelector('#capacity');
-const priceErrorMessage = 'Не больше 100000';
+const PRICE_ERROR_MESSAGE = 'Не больше 100000';
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const typeInput = document.querySelector('#type');
@@ -48,7 +50,7 @@ const blockSubmitButton = () => {
   submitButton.textContent = submitButtonText.SENDING;
 };
 
-const unBlockSubmitButton = () => {
+const unlockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = submitButtonText.IDLE;
 };
@@ -86,12 +88,12 @@ timeIn.addEventListener('change', onChangeTimeIn);
 timeOut.addEventListener('change', onChangeTimeOut);
 
 pristine.addValidator(price, (value) => {
-  if(value <= 100000){
+  if(value <= MAX_PRICE){
     return true;
   } return false;
-}, priceErrorMessage);
+}, PRICE_ERROR_MESSAGE);
 
-const validateImages = (url) => /.jpg$/i.test(url) || /.png$/i.test(url) || /.jpeg$/i.test(url);
+const validateImages = (url) => /.jpg$/i.test(url) || /.png$/i.test(url) || /.jpeg$/i.test(url) || url.length === 0;
 
 pristine.addValidator(imagesInput, validateImages, errImg);
 const setUserFormSubmit = (onSuccess) => {
@@ -101,7 +103,7 @@ const setUserFormSubmit = (onSuccess) => {
     if(isValid){
       blockSubmitButton();
       const formData = new FormData(evt.target);
-      fetch('https://28.javascript.pages.academy/keksobooking',
+      fetch(ADDRESS_POST_DATA,
         {
           method : 'POST',
           type : 'multipart/form-data',
@@ -119,7 +121,7 @@ const setUserFormSubmit = (onSuccess) => {
         .catch(() => {
           showError();
         })
-        .finally(() => unBlockSubmitButton());
+        .finally(() => unlockSubmitButton());
     }
   });
 };

@@ -1,14 +1,17 @@
+
+const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const WIDTH_OF_IMG = 70;
+const HEIGHT_OF_IMG = 70;
 const fileChooserAvatar = document.querySelector('.ad-form-header__input');
 const previewAvatar = document.querySelector('.ad-form-header__preview img');
 const fileChooserPicture = document.querySelector('.ad-form__upload input');
 const divPicture = document.querySelector('.ad-form__photo');
 const imgPicture = document.createElement('img');
-imgPicture.width = 70 ;
-imgPicture.height = 70 ;
+imgPicture.width = WIDTH_OF_IMG ;
+imgPicture.height = HEIGHT_OF_IMG ;
 divPicture.appendChild(imgPicture);
 const previewPicture = divPicture.querySelector('img');
 
-const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const changePictures = (fileChooser, preview) =>{
   fileChooser.addEventListener('change', () => {
     const file = fileChooser.files[0];

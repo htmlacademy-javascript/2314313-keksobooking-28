@@ -1,5 +1,5 @@
 import { renderPosterProp, createPosterProps, fragment } from './ads.js';
-import { unBlockForm } from './form-states.js';
+import { unlockForm } from './form-states.js';
 const addressInput = document.querySelector('#address');
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -12,7 +12,7 @@ const cityCenter = {
 const ZOOM = 10;
 const map = L.map('map-canvas')
   .on('load', () => {
-    unBlockForm();
+    unlockForm();
   })
   .setView(cityCenter, ZOOM);
 
