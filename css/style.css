@@ -944,7 +944,8 @@ fieldset {
  */
 
 .success,
-.error {
+.error,
+.error__server {
   position: fixed;
   top: 0;
   left: 0;
@@ -1047,4 +1048,9 @@ fieldset {
 
 .hidden {
   display: none;
+}
+
+.modal-open {
+  height: 100vh;
+  overflow: hidden;
 }
