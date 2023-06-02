@@ -2,6 +2,7 @@ import { createMarkers, markerGroup } from './map.js';
 const mapFilters = document.querySelectorAll('.map__filter');
 const mapFeatures = document.querySelectorAll('#housing-features input');
 const DEFAULT_FILTER = 'any';
+const MAX_COUNT_MARKERS = 10;
 const statesOfPriceValue = {
   'middle': {
     min : '10000',
@@ -61,7 +62,8 @@ const filterAds = (data) => {
   });
 
   markerGroup.clearLayers();
-  createMarkers(ads.slice(0,10));
+
+  createMarkers(ads.slice(0, MAX_COUNT_MARKERS));
 };
 
 const onClickFilter = (cb) => {

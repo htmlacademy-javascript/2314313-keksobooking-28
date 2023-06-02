@@ -28,10 +28,10 @@ const beActive = (formName, formInputs) => {
   changePlaceholder();
 };
 
-const unBlockForm = () => beActive(form, attributesInForm);
-const unBlockMapFilters = () => beActive(formMapFilters, attributesInMap);
+const unlockForm = () => beActive(form, attributesInForm);
+const unlockMapFilters = () => beActive(formMapFilters, attributesInMap);
 
 blockForm();
 blockMapFilters();
 
-export { unBlockForm, unBlockMapFilters, formMapFilters };
+export { unlockForm, unlockMapFilters, formMapFilters };
