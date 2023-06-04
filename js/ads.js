@@ -1,4 +1,4 @@
-import { TYPES_ON_RUS } from './data.js';
+import { typesOnRus } from './data.js';
 
 const fragment = document.createDocumentFragment();
 
@@ -41,7 +41,7 @@ const createPosterProps = ({author, offer}) => {
         querySelector : '.popup__type',
         condition : offer.type,
         targetProp : 'textContent',
-        targetValue : TYPES_ON_RUS[offer.type],
+        targetValue : typesOnRus[offer.type],
       }
     },
     {
