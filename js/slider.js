@@ -1,13 +1,17 @@
 import { price } from './form-validate.js';
 const sliderElement = document.querySelector('.ad-form__slider');
+const START_VALUE = 5000;
+const STEP = 1;
+const MIN_SLIDER = 0;
+const MAX_SLIDER = 100000;
 price.value = 0;
 noUiSlider.create(sliderElement, {
   range: {
-    min : 0,
-    max : 100000,
+    min : MIN_SLIDER,
+    max : MAX_SLIDER,
   },
-  start: 5000,
-  step: 1,
+  start: START_VALUE,
+  step: STEP,
   connect : 'lower',
   format : {
     to: function(value) {
@@ -36,7 +40,7 @@ const disableSlider = () => {
 
 const resetSlider = () => {
   sliderElement.noUiSlider.updateOptions({
-    start : 5000,
+    start : START_VALUE,
   });
 };
 

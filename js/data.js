@@ -7,8 +7,6 @@ const MAX_LAT = 35.70000;
 const MIN_LNG = 139.70000;
 const MAX_LNG = 139.80000;
 const DEFAULT_NUM = 10;
-let lat;
-let lng;
 
 const TITLES = [
   'Заголовок 3',
@@ -36,7 +34,7 @@ const FEATURES = [
   'conditioner',
 ];
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Описание 1',
   'Описание 2',
   'Описание 3',
@@ -48,13 +46,16 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const TYPES_ON_RUS = {
+const typesOnRus = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец',
   hotel: 'Отель',
 };
+
+let lat;
+let lng;
 
 const getUniqueAddressImg = getUniqueRandomInteger(MIN_INDEX, MAX_INDEX);
 
@@ -81,7 +82,7 @@ const createOfferObject = () => {
   offer.checkin = CHECK_IN_OUT[getRandomInteger(0, CHECK_IN_OUT.length - 1)];
   offer.checkout = CHECK_IN_OUT[getRandomInteger(0, CHECK_IN_OUT.length - 1)];
   offer.features = checkMatch(FEATURES);
-  offer.description = DESCRIPTION[getRandomInteger(0, DESCRIPTION.length - 1)];
+  offer.description = DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)];
   offer.photos = createArray(PHOTOS);
   return offer;
 };
@@ -103,4 +104,4 @@ const createData = () => {
 
 const createAllData = () => Array.from({ length: DEFAULT_NUM }, () => createData());
 
-export { createAllData, TYPES_ON_RUS , createData};
+export { createAllData, typesOnRus , createData};

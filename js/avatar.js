@@ -2,6 +2,7 @@
 const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const WIDTH_OF_IMG = 70;
 const HEIGHT_OF_IMG = 70;
+const DEFAULT_IMG_SRC = 'img/muffin-grey.svg';
 const fileChooserAvatar = document.querySelector('.ad-form-header__input');
 const previewAvatar = document.querySelector('.ad-form-header__preview img');
 const fileChooserPicture = document.querySelector('.ad-form__upload input');
@@ -25,7 +26,7 @@ const changePictures = (fileChooser, preview) =>{
 
 const clearPictures = (img, fileInput) => {
   if(fileInput.classList.contains('ad-form-header__input')){
-    img.src = 'img/muffin-grey.svg';
+    img.src = DEFAULT_IMG_SRC;
   } else {
     img.src = '';
   }

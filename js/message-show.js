@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+const TEXT_PARAGRAPH = 'Ошибка сервера. Перезагрузите страницу.';
 const successElement = document.querySelector('#success').content.querySelector('.success');
 const errElement = document.querySelector('#error').content.querySelector('.error');
 
@@ -58,7 +59,7 @@ const showErrGet = () => {
   div.appendChild(paragraph);
   div.classList.add('error__server');
   paragraph.classList.add('error__message');
-  paragraph.textContent = 'Ошибка сервера. Перезагрузите страницу.';
+  paragraph.textContent = TEXT_PARAGRAPH;
   document.body.insertAdjacentElement('beforeend', div);
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeyDown);
