@@ -1,15 +1,14 @@
 import { renderPosterProp, createPosterProps, fragment } from './ads.js';
 import { unlockForm } from './form-states.js';
-const addressInput = document.querySelector('#address');
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const ZOOM = 10;
 const cityCenter = {
   lat : 35.6894,
   lng :  139.692,
 };
 
-
-const ZOOM = 10;
+const addressInput = document.querySelector('#address');
 const map = L.map('map-canvas')
   .on('load', () => {
     unlockForm();

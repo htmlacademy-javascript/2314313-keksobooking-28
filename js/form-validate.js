@@ -2,15 +2,6 @@ import { showSuccess, showError } from './message-show.js';
 const ADDRESS_POST_DATA = 'https://28.javascript.pages.academy/keksobooking';
 const MAX_PRICE = 100000;
 const PRICE_ERROR_MESSAGE = 'Не больше 100000';
-const form = document.querySelector('.ad-form');
-const price = form.querySelector('#price');
-const fieldRooms = form.querySelector('#room_number');
-const fieldGuests = form.querySelector('#capacity');
-const timeIn = document.querySelector('#timein');
-const timeOut = document.querySelector('#timeout');
-const typeInput = document.querySelector('#type');
-const imagesInput = document.querySelector('#images');
-const submitButton = document.querySelector('.ad-form__submit');
 const ERR_IMG = 'Такой формат не подходит';
 const roomsOptions = {
   '1' : ['1'],
@@ -31,6 +22,17 @@ const submitButtonText = {
   IDLE: 'Сохранить',
   SENDING: 'Сохраняю...'
 };
+
+const form = document.querySelector('.ad-form');
+const price = form.querySelector('#price');
+const fieldRooms = form.querySelector('#room_number');
+const fieldGuests = form.querySelector('#capacity');
+const timeIn = document.querySelector('#timein');
+const timeOut = document.querySelector('#timeout');
+const typeInput = document.querySelector('#type');
+const imagesInput = document.querySelector('#images');
+const submitButton = document.querySelector('.ad-form__submit');
+
 
 let selectedHousing = 'flat';
 

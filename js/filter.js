@@ -1,6 +1,4 @@
 import { createMarkers, markerGroup } from './map.js';
-const mapFilters = document.querySelectorAll('.map__filter');
-const mapFeatures = document.querySelectorAll('#housing-features input');
 const DEFAULT_FILTER = 'any';
 const MAX_COUNT_MARKERS = 10;
 const statesOfPriceValue = {
@@ -17,6 +15,9 @@ const statesOfPriceValue = {
     max : '100000',
   }
 };
+
+const mapFilters = document.querySelectorAll('.map__filter');
+const mapFeatures = document.querySelectorAll('#housing-features input');
 
 const filterAds = (data) => {
   let ads = data;
